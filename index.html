@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Complete Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* ========================================
+           COMPLETE CSS - ALL STYLES IN ONE PLACE
+           ======================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-color: #1f2937;
+            --light-color: #f3f4f6;
+            --white: #ffffff;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+        }
+
+        .nav-menu li a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(30, 64, 175, 0.95)),
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px;
+            text-align: center;
+            color: var(--white);
+            animation: fadeIn 1s;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: var(--white);
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            padding: 4rem 0;
+        }
+
+        .quick-links h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .link-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .link-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        .link-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .link-card h3 {
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .link-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Auth Pages */
+        .auth-container {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-box {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .auth-header h2 {
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .error-message {
+            display: block;
+            color: var(--danger-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .demo-credentials {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: var(--light-color);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .demo-credentials code {
+            background: var(--white);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 3rem 0;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 3rem 0;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tbody tr:hover {
+            background: var(--light-color);
+        }
+
+        /* Calculator */
+        .calculator-box {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr auto;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .calculator-result {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--light-color);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        /* Calendar */
+        .calendar-grid {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .calendar-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .day-label {
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            padding: 0.5rem;
+        }
+
+        .calendar-body {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            padding: 0.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .calendar-day:hover {
+            background: var(--light-color);
+            border-color: var(--primary-color);
+        }
+
+        .calendar-day.today {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--secondary-color);
+                flex-direction: column;
+                padding: 1rem;
+                display: none;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="showPage('home')">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Student Portal</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a onclick="showPage('home')"><i class="fas fa-home"></i> Home</a></li>
+                <li><a onclick="showPage('courses')"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a onclick="showPage('grades')"><i class="fas fa-chart-line"></i> Grades</a></li>
+                <li><a onclick="showPage('calendar')"><i class="fas fa-calendar"></i> Events</a></li>
+                <li><a onclick="showPage('profile')"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a onclick="showPage('contact')"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a onclick="showPage('login')" style="background: rgba(239, 68, 68, 0.2);"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to Student Portal</h1>
+                <p>LEARN!</p>
+                <div class="hero-buttons">
+                    <a onclick="showPage('courses')" class="btn btn-primary">Explore Courses</a>
+                    <a onclick="showPage('register')" class="btn btn-secondary">Register Now</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-links">
+            <div class="container">
+                <h2>Quick Access</h2>
+                <div class="links-grid">
+                    <div class="link-card" onclick="showPage('profile')">
+                        <i class="fas fa-user-circle"></i>
+                        <h3>My Profile</h3>
+                  -      <p>View and edit your personal information</p>
+                    </div>
+                    <div class="link-card" onclick="showPage('courses')">
+                        <i class="fas fa-book-open"></i>
+                        <h3>My Courses</h3>
+                        <p>Browse and manage your enrolled courses</p>
+                    </div>
+                    <div class="link-card" onclick="showPage('grades')">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Grade Calculator</h3>
+                        <p>Calculate your GPA and semester grades</p>
+                    </div>
+                    <div class="link-card" onclick="showPage('calendar')">
+                        <i class="fas fa-calendar-check"></i>
+                        <h3>Event Calendar</h3>
+                        <p>Stay updated with college events</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- LOGIN PAGE -->
+    <div id="login" class="page">
+        <div class="auth-container">
+            <div class="auth-box">
+                <div class="auth-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h2>Student Portal Login</h2>
+                    <p>Enter your credentials to access your account</p>
+                </div>
+                
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Username</label>
+                        <input type="text" id="loginUsername" placeholder="Enter your username" required>
+                        <span class="error-message" id="usernameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <p>Don't have an account? <a onclick="showPage('register')" style="color: var(--primary-color); cursor: pointer;">Register here</a></p>
+                    </div>
+                </form>
+
+                <div class="demo-credentials">
+                    <p><strong>Demo Credentials:</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGISTER PAGE -->
+    <div id="register" class="page">
+        <div class="auth-container">
+            <div class="auth-box" style="max-width: 600px;">
+                <div class="auth-header">
+                    <i class="fas fa-user-plus"></i>
+                    <h2>New Student Registration</h2>
+                    <p>Create your account to get started</p>
+                </div>
+                
+                <form id="registerForm" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name *</label>
+                        <input type="text" id="regName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email Address *</label>
+                        <input type="email" id="regEmail" placeholder="Enter email address" required>
+                        <span class="error-message" id="regEmailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-user-circle"></i> Username *</label>
+                        <input type="text" id="regUsername" placeholder="Choose a username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password *</label>
+                        <input type="password" id="regPassword" placeholder="Create a password" required>
+                        <small>Password must be at least 6 characters</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-building"></i> Department *</label>
+                        <select id="regDepartment" required>
+                            <option value="">Select Department</option>
+                            <option value="cse">Computer Science & Engineering</option>
+                            <option value="ece">Electronics & Communication</option>
+                            <option value="mech">Mechanical Engineering</option>
+                            <option value="civil">Civil Engineering</option>
+                            <option value="eee">Electrical Engineering</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-check"></i> Register Now
+                    </button>
+
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <p>Already have an account? <a onclick="showPage('login')" style="color: var(--primary-color); cursor: pointer;">Login here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- COURSES PAGE -->
+    <div id="courses" class="page">
+        <div class="page-header">
+            <h1><i class="fas fa-book"></i> Course Catalog</h1>
+            <p>Explore and search through available courses</p>
+        </div>
+
+        <div class="container">
+            <div style="margin-bottom: 2rem;">
+                <input type="text" id="courseSearch" placeholder="🔍 Search courses..." 
+                       style="width: 100%; padding: 1rem; border: 2px solid var(--border-color); border-radius: 10px; font-size: 1rem;"
+                       oninput="filterCourses()">
+            </div>
+
+            <div class="cards-grid" id="coursesGrid">
+                <!-- Courses will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- GRADES PAGE -->
+    <div id="grades" class="page">
+        <div class="page-header">
+            <h1><i class="fas fa-chart-line"></i> Academic Performance</h1>
+            <p>View your grades and calculate GPA</p>
+        </div>
+
+        <div class="container">
+            <h2 style="margin-bottom: 1rem;">Semester Results</h2>
+            <div class="table-container">
+                <table id="gradesTable">
+                    <thead>
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Course Name</th>
+                            <th>Credits</th>
+                            <th>Grade</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CSE401</td>
+                            <td>Software Engineering</td>
+                            <td>3</td>
+                            <td>A</td>
+                            <td>9.0</td>
+                        </tr>
+                        <tr>
+                            <td>CSE402</td>
+                            <td>Computer Networks</td>
+                            <td>4</td>
+                            <td>A+</td>
+                            <td>10.0</td>
+                        </tr>
+                        <tr>
+                            <td>CSE403</td>
+                            <td>Operating Systems</td>
+                            <td>4</td>
+                            <td>B+</td>
+                            <td>8.0</td>
+                        </tr>
+                        <tr>
+                            <td>CSE404</td>
+                            <td>Web Technologies</td>
+                            <td>3</td>
+                            <td>A</td>
+                            <td>9.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="calculator-box">
+                <h2>GPA Calculator</h2>
+                <p style="color: var(--text-light); margin-bottom: 2rem;">Calculate your expected GPA</p>
+                
+                <div id="calculatorInputs">
+                    <div class="input-row">
+                        <input type="text" placeholder="Course Name" class="course-name">
+                        <input type="number" placeholder="Credits" class="course-credits" min="1" max="6">
+                        <select class="course-grade">
+                            <option value="">Select Grade</option>
+                            <option value="10">A+ (10)</option>
+                            <option value="9">A (9)</option>
+                            <option value="8">B+ (8)</option>
+                            <option value="7">B (7)</option>
+                            <option value="6">C+ (6)</option>
+                        </select>
+                        <button type="button" class="btn btn-sm" style="background: var(--danger-color); color: white;" onclick="this.parentElement.remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <button class="btn btn-secondary" onclick="addCourseRow()">
+                        <i class="fas fa-plus"></i> Add Course
+                    </button>
+                    <button class="btn btn-primary" onclick="calculateGPA()">
+                        <i class="fas fa-calculator"></i> Calculate GPA
+                    </button>
+                </div>
+
+                <div id="calculatorResult" class="calculator-result hidden">
+                    <h3>Your GPA</h3>
+                    <div class="result-value" id="gpaValue">0.00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CALENDAR PAGE -->
+    <div id="calendar" class="page">
+        <div class="page-header">
+            <h1><i class="fas fa-calendar-alt"></i> Event Calendar</h1>
+            <p>Stay updated with college events</p>
+        </div>
+
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <button class="btn btn-secondary" onclick="changeMonth(-1)">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <h2 id="currentMonth">January 2024</h2>
+                <button class="btn btn-secondary" onclick="changeMonth(1)">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="calendar-grid">
+                <div class="calendar-header">
+                    <div class="day-label">Sun</div>
+                    <div class="day-label">Mon</div>
+                    <div class="day-label">Tue</div>
+                    <div class="day-label">Wed</div>
+                    <div class="day-label">Thu</div>
+                    <div class="day-label">Fri</div>
+                    <div class="day-label">Sat</div>
+                </div>
+                <div class="calendar-body" id="calendarBody">
+                    <!-- Calendar days will be generated -->
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <h2>Upcoming Events</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🎓 Tech Fest 2024</h3>
+                        <p><i class="fas fa-calendar"></i> February 15, 2024</p>
+                        <p>Annual technology festival with competitions and workshops</p>
+                    </div>
+                    <div class="card">
+                        <h3>📝 Mid-Semester Exams</h3>
+                        <p><i class="fas fa-calendar"></i> February 20, 2024</p>
+                        <p>Mid-semester examinations for all courses</p>
+                    </div>
+                    <div class="card">
+                        <h3>💻 ML Workshop</h3>
+                        <p><i class="fas fa-calendar"></i> February 10, 2024</p>
+                        <p>Hands-on workshop on Machine Learning fundamentals</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROFILE PAGE -->
+    <div id="profile" class="page">
+        <div class="page-header">
+            <h1><i class="fas fa-user"></i> Student Profile</h1>
+            <p>View and update your personal information</p>
+        </div>
+
+        <div class="container">
+            <div class="card" style="max-width: 800px; margin: 0 auto;">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="width: 150px; height: 150px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 4rem;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h2>John Doe</h2>
+                    <p style="color: var(--text-light);">Student ID: 2021CSE0123</p>
+                </div>
+
+                <form onsubmit="event.preventDefault(); alert('Profile updated successfully!');">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" value="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" value="john.doe@student.edu">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" value="+1 234 567 8900">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Department</label>
+                        <input type="text" value="Computer Science & Engineering" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Current Semester</label>
+                        <input type="text" value="4th Semester" disabled>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <div class="page-header">
+            <h1><i class="fas fa-envelope"></i> Contact Faculty</h1>
+            <p>Reach out to faculty members for assistance</p>
+        </div>
+
+        <div class="container">
+            <div class="card" style="max-width: 800px; margin: 0 auto;">
+                <h2>Send a Message</h2>
+                <form onsubmit="handleContactSubmit(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Your Name *</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Your Email *</label>
+                        <input type="email" id="contactEmail" required>
+                        <span class="error-message" id="contactEmailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-building"></i> Department *</label>
+                        <select required>
+                            <option value="">Select Department</option>
+                            <option value="cse">Computer Science</option>
+                            <option value="ece">Electronics</option>
+                            <option value="mech">Mechanical</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> Subject *</label>
+                        <input type="text" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-comment"></i> Message *</label>
+                        <textarea rows="6" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>Student Portal provides seamless access to academic resources and services.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@studentportal.edu</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 8900</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Student Portal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========================================
+        // ALL JAVASCRIPT CODE IN ONE PLACE
+        // ========================================
+
+        // Page Navigation
+        function showPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageName).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Close mobile menu
+            document.getElementById('navMenu').classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Load page-specific content
+            if (pageName === 'courses') {
+                loadCourses();
+            } else if (pageName === 'calendar') {
+                generateCalendar();
+            }
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // Login Handler
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (username === 'student123' && password === 'pass123') {
+                alert('Login successful! Welcome back!');
+                showPage('home');
+            } else {
+                alert('Invalid credentials. Use demo: student123 / pass123');
+            }
+        }
+
+        // Register Handler
+        function handleRegister(event) {
+            event.preventDefault();
+            const email = document.getElementById('regEmail').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(email)) {
+                document.getElementById('regEmailError').textContent = 'Please enter a valid email';
+                return;
+            }
+            
+            alert('Registration successful! You can now login.');
+            showPage('login');
+        }
+
+        // Contact Form Handler
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('contactEmail').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(email)) {
+                document.getElementById('contactEmailError').textContent = 'Please enter a valid email';
+                return;
+            }
+            
+            alert('Message sent successfully! Faculty will respond soon.');
+            event.target.reset();
+        }
+
+        // Courses Data
+        const coursesData = [
+            { code: 'CSE101', name: 'Introduction to Programming', instructor: 'Dr. John Smith', credits: 4, department: 'CSE' },
+            { code: 'CSE201', name: 'Data Structures', instructor: 'Prof. Sarah Johnson', credits: 4, department: 'CSE' },
+            { code: 'CSE301', name: 'Database Management', instructor: 'Dr. Michael Brown', credits: 3, department: 'CSE' },
+            { code: 'CSE401', name: 'Software Engineering', instructor: 'Prof. Emily Davis', credits: 3, department: 'CSE' },
+            { code: 'ECE101', name: 'Circuit Analysis', instructor: 'Dr. Robert Wilson', credits: 4, department: 'ECE' },
+            { code: 'ECE201', name: 'Digital Electronics', instructor: 'Prof. Linda Martinez', credits: 3, department: 'ECE' },
+            { code: 'MECH101', name: 'Engineering Mechanics', instructor: 'Dr. James Anderson', credits: 4, department: 'MECH' },
+            { code: 'MECH201', name: 'Thermodynamics', instructor: 'Prof. Patricia Thomas', credits: 3, department: 'MECH' }
+        ];
+
+        // Load Courses
+        function loadCourses() {
+            const grid = document.getElementById('coursesGrid');
+            grid.innerHTML = coursesData.map(course => `
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span style="background: var(--primary-color); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem;">${course.code}</span>
+                        <span style="background: var(--light-color); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem;">${course.credits} Credits</span>
+                    </div>
+                    <h3>${course.name}</h3>
+                    <p><i class="fas fa-user-tie"></i> ${course.instructor}</p>
+                    <p style="color: var(--text-light);">Department: ${course.department}</p>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="alert('Enrollment feature coming soon!')">
+                        <i class="fas fa-plus-circle"></i> Enroll Now
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Filter Courses
+        function filterCourses() {
+            const search = document.getElementById('courseSearch').value.toLowerCase();
+            const filtered = coursesData.filter(course => 
+                course.name.toLowerCase().includes(search) ||
+                course.code.toLowerCase().includes(search) ||
+                course.instructor.toLowerCase().includes(search)
+            );
+            
+            const grid = document.getElementById('coursesGrid');
+            if (filtered.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; color: var(--text-light); grid-column: 1/-1;">No courses found</p>';
+            } else {
+                grid.innerHTML = filtered.map(course => `
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span style="background: var(--primary-color); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem;">${course.code}</span>
+                            <span style="background: var(--light-color); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem;">${course.credits} Credits</span>
+                        </div>
+                        <h3>${course.name}</h3>
+                        <p><i class="fas fa-user-tie"></i> ${course.instructor}</p>
+                        <p style="color: var(--text-light);">Department: ${course.department}</p>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="alert('Enrollment feature coming soon!')">
+                            <i class="fas fa-plus-circle"></i> Enroll Now
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // GPA Calculator
+        function addCourseRow() {
+            const container = document.getElementById('calculatorInputs');
+            const newRow = `
+                <div class="input-row">
+                    <input type="text" placeholder="Course Name" class="course-name">
+                    <input type="number" placeholder="Credits" class="course-credits" min="1" max="6">
+                    <select class="course-grade">
+                        <option value="">Select Grade</option>
+                        <option value="10">A+ (10)</option>
+                        <option value="9">A (9)</option>
+                        <option value="8">B+ (8)</option>
+                        <option value="7">B (7)</option>
+                        <option value="6">C+ (6)</option>
+                    </select>
+                    <button type="button" class="btn btn-sm" style="background: var(--danger-color); color: white;" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', newRow);
+        }
+
+        function calculateGPA() {
+            const rows = document.querySelectorAll('#calculatorInputs .input-row');
+            let totalCredits = 0;
+            let totalPoints = 0;
+            
+            rows.forEach(row => {
+                const credits = parseFloat(row.querySelector('.course-credits').value) || 0;
+                const grade = parseFloat(row.querySelector('.course-grade').value) || 0;
+                
+                if (credits && grade) {
+                    totalCredits += credits;
+                    totalPoints += credits * grade;
+                }
+            });
+            
+            if (totalCredits === 0) {
+                alert('Please add courses with credits and grades!');
+                return;
+            }
+            
+            const gpa = (totalPoints / totalCredits).toFixed(2);
+            document.getElementById('gpaValue').textContent = gpa;
+            document.getElementById('calculatorResult').classList.remove('hidden');
+        }
+
+        // Calendar
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                           'July', 'August', 'September', 'October', 'November', 'December'];
+
+        function generateCalendar() {
+            const calendarBody = document.getElementById('calendarBody');
+            document.getElementById('currentMonth').textContent = monthNames[currentMonth] + ' ' + currentYear;
+            
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            
+            let html = '';
+            
+            // Empty cells before month starts
+            for (let i = 0; i < firstDay; i++) {
+                html += '<div class="calendar-day" style="border: none;"></div>';
+            }
+            
+            // Days of the month
+            const today = new Date();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const isToday = day === today.getDate() && 
+                               currentMonth === today.getMonth() && 
+                               currentYear === today.getFullYear();
+                html += `<div class="calendar-day ${isToday ? 'today' : ''}">${day}</div>`;
+            }
+            
+            calendarBody.innerHTML = html;
+        }
+
+        function changeMonth(delta) {
+            currentMonth += delta;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar();
+        }
+
+        // Initialize
+        window.onload = function() {
+            loadCourses();
+            generateCalendar();
+        };
+
+
+        console.log('%c Welcome to Student Portal! ', 'background: #2563eb; color: white; font-size: 20px; padding: 10px;');
+    </script>
+</body>
+</html>
